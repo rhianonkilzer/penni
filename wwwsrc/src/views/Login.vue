@@ -12,8 +12,8 @@
             <button type="submit">Create Account</button>
         </form>
         <div @click="loginForm = !loginForm">
-            <p v-if="loginForm">No account Click to Register</p>
-            <p v-else>Already have an account click to Login</p>
+            <p v-if="loginForm">No account? Click to Register</p>
+            <p v-else>Already have an account? click to Login</p>
         </div>
     </div>
 </template>
@@ -49,3 +49,10 @@
         }
     };
 </script>
+<style scoped>
+    body {
+        background-color: rgba(0, 0, 0, 0.712);
+        color: white;
+        text-shadow: 0px 2px 6px black;
+    }
+</style>

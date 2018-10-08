@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <h1>Welcome Home</h1>
+    <h1>Penni</h1>
+    <h1>Welcome, {{$store.state.user.username}}!</h1>
   </div>
 </template>
 
@@ -15,3 +16,9 @@
     }
   };
 </script>
+<style scoped>
+  h1 {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.678);
+  }
+</style>
