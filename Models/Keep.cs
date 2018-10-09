@@ -4,7 +4,7 @@ using System.Data.SqlTypes;
 
 namespace keepr.Models
 {
-    public class Pin
+    public class Keep
     {
         public int Id { get; set; }
         [Required]
@@ -13,13 +13,15 @@ namespace keepr.Models
         [Required]
         [MaxLength(255)]
         public string Description { get; set; }
+        [Required]
         public string UserId { get; set; }
+        [Required]
         public string Img { get; set; }
-        public int Views { get; set; }
-        public int Shares { get; set; }
-        public int Keeps { get; set; }
-
-        public SqlByte IsPrivate { get; set; }
+        public int Views { get; set; } = 0;
+        public int Shares { get; set; } = 0;
+        public int Keeps { get; set; } = 0;
+        [Required]
+        public bool IsPrivate { get; set; }
 
 
     }
