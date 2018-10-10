@@ -20,9 +20,9 @@ namespace keepr.Repositories
             string id = Guid.NewGuid().ToString();
             string hash = BCrypt.Net.BCrypt.HashPassword(creds.Password);
             int success = _db.Execute(@"
-        INSERT INTO users (id, username, email, hash)
-        VALUES (@id, @username, @email, @hash);
-      ", new
+            INSERT INTO users (id, username, email, hash)
+            VALUES (@id, @username, @email, @hash);
+             ", new
             {
                 id,
                 username = creds.Username,
@@ -57,8 +57,8 @@ namespace keepr.Repositories
         internal User GetUserById(string id)
         {
             var user = _db.Query<User>(@"
-      SELECT * FROM users WHERE id = @id
-      ", new { id }).FirstOrDefault();
+            SELECT * FROM users WHERE id = @id
+            ", new { id }).FirstOrDefault();
             if (user != null)
             {
                 user.Hash = null;
