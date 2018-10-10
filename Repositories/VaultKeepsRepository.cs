@@ -16,7 +16,17 @@ namespace keepr.Repositories
         {
             _db = db;
         }
+        public VaultKeep Create(VaultKeep vaultkeep)
+        {
+            int id = _db.ExecuteScalar<int>(@"
+            INSERT INTO vaultkeeps (userId, keepId, vaultId)
+            VALUES (@UserId, @KeepId, @VaultId);
+            SELECT LAST_INSERT_ID();", vaultkeep
+            );
 
+            vaultkeep.Id = id;
+            return vaultkeep;
+        }
         public IEnumerable<VaultKeep> GetAll()
         {
             return _db.Query<VaultKeep>($"SELECT * FROM {TableName}");

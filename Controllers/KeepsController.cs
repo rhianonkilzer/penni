@@ -6,7 +6,7 @@ using keepr.Repositories;
 using Microsoft.AspNetCore.Authorization;
 
 
-namespace keepr.Repositories
+namespace keepr.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
