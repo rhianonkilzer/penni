@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>Penni</h1>
-    <h1>Welcome, {{$store.state.user.username}}!</h1>
+    <h3>Welcome, {{$store.state.user.username}}!</h3>
   </div>
 </template>
 
