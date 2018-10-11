@@ -12,7 +12,11 @@
         name: "vault",
         data() {
             return {
-
+                newKeep: {
+                    title: "",
+                    description: "",
+                    vaultId: this.vaultId
+                }
             }
         },
         created() {
