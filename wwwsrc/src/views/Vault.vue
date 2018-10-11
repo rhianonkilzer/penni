@@ -10,11 +10,11 @@
 <script>
     export default {
         name: "vault",
-        // data() {
-        //     return {
+        data() {
+            return {
 
-        //     }
-        // }
+            }
+        },
         created() {
             if (!this.$store.state.user._id) {
                 this.$router.push({ name: "login" });
@@ -33,9 +33,7 @@
             this.$store.dispatch("getKeeps", this.vaultId)
         },
         methods: {
-            addKeep() {
-                this.$store.dispatch("")
-            }
+
         }
 
     }

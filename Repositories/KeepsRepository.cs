@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using Dapper;
 using keepr.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace keepr.Repositories
 {
@@ -24,7 +25,7 @@ namespace keepr.Repositories
         // GET BY ID 
         public Keep GetById(int id)
         {
-            return _db.Query<Keep>("SELECT *FROM keeps WHERE id = @id", new { id }).FirstOrDefault();
+            return _db.Query<Keep>("SELECT * FROM keeps WHERE id = @id", new { id }).FirstOrDefault();
         }
         // CREATE  
         public Keep Create(Keep keep)

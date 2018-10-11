@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/penni.png" height="200">
+    <img src="./assets/penni.png" height="200" class="penni-logo">
     <router-view />
   </div>
 </template>
@@ -12,6 +12,10 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+  }
+
+  .penni-logo {
+    filter: brightness(240%);
   }
 
   #nav {

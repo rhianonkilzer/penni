@@ -12,6 +12,7 @@ namespace keepr.Controllers
     [ApiController]
     public class KeepsController : Controller
     {
+
         KeepsRepository _repo;
         public KeepsController(KeepsRepository repo)
         {
@@ -29,6 +30,7 @@ namespace keepr.Controllers
         {
             if (ModelState.IsValid)
             {
+                keep.UserId = HttpContext.User.Identity.Name;
                 return _repo.Create(keep);
             }
             throw new Exception("INVALID Keep");
