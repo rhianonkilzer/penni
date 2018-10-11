@@ -20,13 +20,20 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     user: {}
+
   },
+
   mutations: {
     setUser(state, user) {
       state.user = user
+
     }
   },
+
+
   actions: {
+
+
     register({ commit, dispatch }, newUser) {
       auth.post('register', newUser)
         .then(res => {
@@ -37,6 +44,8 @@ export default new Vuex.Store({
           console.log('[registration failed] :', e)
         })
     },
+
+
     authenticate({ commit, dispatch }) {
       auth.get('authenticate')
         .then(res => {
@@ -47,6 +56,8 @@ export default new Vuex.Store({
           console.log('not authenticated')
         })
     },
+
+
     login({ commit, dispatch }, creds) {
       auth.post('login', creds)
         .then(res => {
@@ -57,5 +68,9 @@ export default new Vuex.Store({
           console.log('Login Failed')
         })
     }
+
+    
+
+
   }
 })
