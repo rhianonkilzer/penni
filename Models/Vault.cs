@@ -11,7 +11,6 @@ namespace keepr.Models
         [Required]
         [MaxLength(255)]
         public string Description { get; set; }
-        [Required]
         public string UserId { get; set; }
 
     }

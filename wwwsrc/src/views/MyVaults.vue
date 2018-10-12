@@ -31,7 +31,9 @@
             if (!this.$store.state.user.id) {
                 this.$router.push({ name: "login" });
             }
+            this.$store.dispatch("getAllVaults")
         },
+
         computed: {
             vaults() {
                 return this.$store.state.vaults

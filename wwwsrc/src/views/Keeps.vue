@@ -11,7 +11,7 @@
 
             <div class="keep col-3" v-for="keep in keeps" :key="keep.id">
                 <p>{{keep.name}}</p>
-                <img :src="keep.img" alt="keep" width="200" height="250">
+                <img :src="keep.img" alt="keep" width="200" height="200">
                 <p>{{keep.description}}</p>
                 <button @click="deleteKeep(keep)">Delete Keep</button>
             </div>
