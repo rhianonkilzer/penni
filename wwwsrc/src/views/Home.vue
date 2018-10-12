@@ -3,7 +3,6 @@
     <h1>Welcome, {{$store.state.user.username}}!</h1>
     <!-- IF LOGGED IN DRAW NAVBAR -->
     <button @click="logout">LOGOUT</button>
-    <button @click="goToVaults">My Vaults</button>
     <MyVaults />
     <Keeps />
   </div>
@@ -29,9 +28,9 @@
       logout() {
         this.$store.dispatch("logout")
       },
-      goToVaults() {
-        this.$store.dispatch("goToVaults")
-      }
+      // goToVaults() {
+      //   this.$store.dispatch("goToVaults")
+      // }
 
     },
     mounted() {
