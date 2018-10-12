@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace keepr.Repositories
             keep.Id = id;
             return keep;
         }
+
         // UPDATE 
         public Keep Update(Keep keep)
         {
@@ -49,12 +51,8 @@ namespace keepr.Repositories
             );
             return keep;
         }
-        //  DELETE
-        public Keep Delete(Keep keep)
-        {
-            _db.Execute("DELETE FROM keeps WHERE id = @Id", keep);
-            return keep;
-        }
+
+
         public IEnumerable<Keep> GetByUserId(string id)
         {
             return _db.Query<Keep>(@"
@@ -63,5 +61,10 @@ namespace keepr.Repositories
             ", new { id });
         }
 
+
+        public bool Delete(int keepId)
+        {
+            return _db.Execute("DELETE FROM keeps WHERE id = @keepId", new { keepId }) == 1;
+        }
     }
 }

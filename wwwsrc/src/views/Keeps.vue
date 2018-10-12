@@ -2,14 +2,18 @@
     <div class="row">
 
         <div class="keeps col-12">
-            <form @submit.prevent="addBoard">
+            <form @submit.prevent="createKeep">
                 <input type="text" placeholder="Name of Keep" v-model="newKeep.name" required>
-                <input type="text" placeholder="Description" v-model="newKeep.description">
+                <input type="text" placeholder="Description" v-model="newKeep.description" required>
+                <input type="url" placeholder="Image url" v-model="newKeep.img" required>
+                <button type="submit">Create Keep</button>
             </form>
-            <button type="submit">Create Keep</button>
 
-            <div class="keep" v-for="keep in keeps" :key="board._id">
-
+            <div class="keep col-3" v-for="keep in keeps" :key="keep.id">
+                <p>{{keep.name}}</p>
+                <img :src="keep.img" alt="keep" width="200" height="250">
+                <p>{{keep.description}}</p>
+                <button @click="deleteKeep(keep)">Delete Keep</button>
             </div>
         </div>
     </div>
@@ -19,16 +23,24 @@
     export default {
         name: 'keeps',
         data() {
-            return {}
+            return {
+                newKeep: {
+                    isPrivate: 0
+                }
+            }
         },
         computed: {
             keeps() {
-                return this.$store.state.keeps[this.keepData._id]
+                return this.$store.state.keeps
             }
         },
         methods: {
-            deleteKeep(keepData) {
-                this.$store.dispatch("deleteKeep", keepData);
+            deleteKeep(keep) {
+                this.$store.dispatch("deleteKeep", keep);
+            },
+            createKeep() {
+                this.$store.dispatch("createKeep", this.newKeep);
+                this.newKeep = { name: "", description: "", img: "", isPrivate: 0 }
             },
         }
     }

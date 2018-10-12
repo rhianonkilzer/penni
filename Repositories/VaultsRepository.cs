@@ -47,18 +47,17 @@ namespace keepr.Repositories
             );
             return vault;
         }
-        //  DELETE
-        public Vault Delete(Vault vault)
-        {
-            _db.Execute("DELETE FROM vaults WHERE id = @Id", vault);
-            return vault;
-        }
+
         public IEnumerable<Vault> GetByUserId(string id)
         {
             return _db.Query<Vault>(@"
             SELECT * FROM vaults
             WHERE userId = @id;
             ", new { id });
+        }
+        public bool Delete(int vaultId)
+        {
+            return _db.Execute("DELETE FROM vaults WHERE id = @vaultId", new { vaultId }) == 1;
         }
 
     }

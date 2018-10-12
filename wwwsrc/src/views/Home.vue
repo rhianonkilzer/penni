@@ -1,15 +1,18 @@
 <template>
   <div class="home">
     <h1>Welcome, {{$store.state.user.username}}!</h1>
+    <!-- IF LOGGED IN DRAW NAVBAR -->
     <button @click="logout">LOGOUT</button>
-
-
+    <button @click="goToVaults">My Vaults</button>
+    <MyVaults />
     <Keeps />
   </div>
 </template>
 
 <script>
   import Keeps from '@/views/Keeps';
+  import MyVaults from '@/views/MyVaults';
+
   export default {
     name: "home",
     mounted() {
@@ -28,12 +31,15 @@
       },
       goToVaults() {
         this.$store.dispatch("goToVaults")
-      },
+      }
 
     },
     mounted() {
-      this.$store.dispatch("getKeeps", this.vaultId)
+      this.$store.dispatch("getAllKeeps", this.vaultId)
     },
+    components: {
+      Keeps
+    }
   };
 </script>
 <style scoped>

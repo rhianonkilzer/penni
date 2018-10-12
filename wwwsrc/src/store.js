@@ -36,7 +36,7 @@ export default new Vuex.Store({
     setVault(state, vault) {
       state.activeVault = vault
     },
-    setKeep(state, keeps) {
+    setKeeps(state, keeps) {
       state.keeps = keeps
     },
     setVaultKeeps(state, vaultkeeps) {
@@ -88,7 +88,7 @@ export default new Vuex.Store({
     // END OF AUTH
 
     // VAULT STUFF
-    getVaults({ commit, dispatch }) {
+    getAllVaults({ commit, dispatch }) {
       api.get('vaults')
         .then(res => {
           commit('setVaults', res.data)
@@ -100,7 +100,7 @@ export default new Vuex.Store({
           commit('setVault', res.data)
         })
     },
-    addVault({ commit, dispatch }, vaultData) {
+    createVault({ commit, dispatch }, vaultData) {
       api.post('vaults', vaultData)
         .then(serverVault => {
           dispatch('getVaults')
@@ -132,18 +132,19 @@ export default new Vuex.Store({
         })
     },
 
-    addKeep({ commit, dispatch }, keepData) {
+    createKeep({ commit, dispatch }, keepData) {
 
       api.post('/keeps', keepData)
         .then(res => {
-          dispatch('getKeeps', keepData.vaultId)
+          dispatch('getAllKeeps')
         })
     },
 
     deleteKeep({ commit, dispatch }, keepData) {
-      api.delete('keeps/' + keepData._id)
+      console.log(keepData)
+      api.delete('keeps/' + keepData.id)
         .then(res => {
-          dispatch('getkeeps', keepData.vaultId)
+          dispatch('getAllKeeps')
         })
     },
     updateKeep({ commit, dispatch }, keep) {

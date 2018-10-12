@@ -20,7 +20,7 @@ namespace keepr.Models
         public int Shares { get; set; } = 0;
         public int Keeps { get; set; } = 0;
         [Required]
-        public bool IsPrivate { get; set; }
+        public int IsPrivate { get; set; } = 0;
 
 
     }
