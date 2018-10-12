@@ -38,7 +38,8 @@
       this.$store.dispatch("getAllKeeps", this.vaultId)
     },
     components: {
-      Keeps
+      Keeps,
+      MyVaults
     }
   };
 </script>
