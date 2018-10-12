@@ -125,6 +125,12 @@ export default new Vuex.Store({
           commit('setKeeps', res.data)
         })
     },
+    getAllKeeps({ commit, dispatch }) {
+      api.get('/keeps')
+        .then(res => {
+          commit('setKeeps', res.data)
+        })
+    },
 
     addKeep({ commit, dispatch }, keepData) {
 

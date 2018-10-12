@@ -1,7 +1,17 @@
 <template>
-    <div class="keeps">
+    <div class="row">
 
+        <div class="keeps col-12">
+            <form @submit.prevent="addBoard">
+                <input type="text" placeholder="Name of Keep" v-model="newKeep.name" required>
+                <input type="text" placeholder="Description" v-model="newKeep.description">
+            </form>
+            <button type="submit">Create Keep</button>
 
+            <div class="keep" v-for="keep in keeps" :key="board._id">
+
+            </div>
+        </div>
     </div>
 </template>
 
@@ -20,11 +30,7 @@
             deleteKeep(keepData) {
                 this.$store.dispatch("deleteKeep", keepData);
             },
-        },
-        components: {
-            Keep
-        },
-        props: ["keepData"]
+        }
     }
 </script>
 

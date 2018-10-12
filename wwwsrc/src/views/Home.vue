@@ -3,10 +3,13 @@
     <h1>Welcome, {{$store.state.user.username}}!</h1>
     <button @click="logout">LOGOUT</button>
 
+
+    <Keeps />
   </div>
 </template>
 
 <script>
+  import Keeps from '@/views/Keeps';
   export default {
     name: "home",
     mounted() {
