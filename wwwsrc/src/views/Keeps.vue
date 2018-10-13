@@ -43,7 +43,7 @@
                             <select name="" id="" v-model="vaultKeep.vaultId">
                                 <option :value="vault.id" v-for="vault in vaults">{{vault.name}}</option>
                             </select>
-                            <button class="btn" @click="addKeepToVault">Add Keep To Vault</button>
+                            <button class="btn" @click="addKeepToVault" data-dismiss="modal">Add Keep To Vault</button>
                         </div>
                     </div>
                 </div>
@@ -94,9 +94,7 @@
             },
             addKeepToVault() {
                 this.vaultKeep.keepId = this.activeKeep.id;
-                this.$store.dispatch("addKeepToVault", this.vaultKeep)
-                this.activeKeep.keeps++
-                this.$store.dispatch("updateKeep", this.activeKeep)
+                this.$store.dispatch("addKeepToVault", { vaultKeep: this.vaultKeep, keep: this.activeKeep })
             }
         }
     }
