@@ -1,9 +1,12 @@
 <template>
   <div class="home">
-    <h1>Welcome, {{$store.state.user.username}}!</h1>
-    <!-- IF LOGGED IN DRAW NAVBAR -->
-    <button @click="logout">LOGOUT</button>
+    <div class="if-loggin" v-if="user.id">
+      <h1>Welcome, {{$store.state.user.username}}!</h1>
+      <button @click="logout">LOGOUT</button>
+    </div>
+    <router-link to="/login">Login</router-link>
     <MyVaults />
+
     <Keeps />
   </div>
 </template>
@@ -15,9 +18,11 @@
   export default {
     name: "home",
     mounted() {
-      // blocks users not logged in
-      if (!this.$store.state.user.id) {
-        this.$router.push({ name: "login" });
+
+    },
+    computed: {
+      user() {
+        return this.$store.state.user
       }
     },
     methods: {

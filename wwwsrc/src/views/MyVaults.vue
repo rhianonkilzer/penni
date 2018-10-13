@@ -7,10 +7,9 @@
         </form>
         <button @click="deleteVault(vault)">Delete Vault</button>
         <div class="vault" v-for="vault in vaults" :key="vault.id">
-            <p>
+            <router-link :to="{name: 'vault', params: {vaultId: vault.id}}">
                 {{vault.name}}
-                {{vault.description}}
-            </p>
+            </router-link>
         </div>
     </div>
 </template>
@@ -27,10 +26,7 @@
             }
         },
         created() {
-            //blocks users not logged in
-            if (!this.$store.state.user.id) {
-                this.$router.push({ name: "login" });
-            }
+
             this.$store.dispatch("getAllVaults")
         },
 

@@ -12,17 +12,13 @@
         name: "vault",
         data() {
             return {
-                newKeep: {
-                    title: "",
-                    description: "",
-                    vaultId: this.vaultId
-                }
             }
         },
         created() {
-            if (!this.$store.state.user._id) {
-                this.$router.push({ name: "login" });
-            }
+            // if (!this.$store.state.user._id) {
+            //     this.$router.push({ name: "login" });
+            // }
+
         },
         computed: {
             vault() {
@@ -33,8 +29,8 @@
             }
         },
         mounted() {
-            this.$store.dispatch("getVault", this.vaultId)
-            this.$store.dispatch("getKeeps", this.vaultId)
+            this.$store.dispatch("getVault", this.$route.params.vaultId)
+            this.$store.dispatch("getKeeps", this.$route.params.vaultId)
         },
         methods: {
 

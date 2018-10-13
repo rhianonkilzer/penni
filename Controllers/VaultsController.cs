@@ -18,11 +18,18 @@ namespace keepr.Controllers
         {
             _repo = repo;
         }
-
+        [Authorize]
         [HttpGet]
         public IEnumerable<Vault> Get()
         {
-            return _repo.GetAll();
+            var userId = HttpContext.User.Identity.Name;
+            return _repo.GetAll(userId);
+        }
+        [Authorize]
+        [HttpGet("{vaultId}")]
+        public Vault GetById(int vaultId)
+        {
+            return _repo.GetById(vaultId);
         }
         [Authorize]
         [HttpPost]

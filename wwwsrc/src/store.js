@@ -120,9 +120,9 @@ export default new Vuex.Store({
 
     //Keeps
     getKeeps({ commit, dispatch }, vaultId) {
-      api.get('vaults/' + vaultId + '/keeps')
+      api.get('vaultkeeps/' + vaultId)
         .then(res => {
-          commit('setKeeps', res.data)
+          commit('setVaultKeeps', res.data)
         })
     },
     getAllKeeps({ commit, dispatch }) {

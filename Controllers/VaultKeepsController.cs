@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class VaultKeepsController : Controller
     {
         VaultKeepsRepository _repo;
@@ -15,10 +17,11 @@ namespace keepr.Controllers
         {
             _repo = repo;
         }
-        [HttpGet]
-        public IEnumerable<VaultKeep> Get()
+        [HttpGet("{vaultId}")]
+        public IEnumerable<Keep> Get(string vaultId)
         {
-            return _repo.GetAll();
+
+            return _repo.GetAll(vaultId);
         }
 
     }

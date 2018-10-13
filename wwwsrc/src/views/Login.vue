@@ -18,7 +18,7 @@
             <p v-else>Already have an account? click to Login</p>
         </div>
 
-
+        <router-link to="/home">Home</router-link>
     </div>
 </template>
 
