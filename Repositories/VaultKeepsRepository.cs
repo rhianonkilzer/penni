@@ -1,5 +1,6 @@
 
 
+using System;
 using System.Collections.Generic;
 using System.Data;
 using Dapper;
@@ -16,7 +17,7 @@ namespace keepr.Repositories
         {
             _db = db;
         }
-        public VaultKeep Create(VaultKeep vaultkeep)
+        public void Create(VaultKeep vaultkeep)
         {
             int id = _db.ExecuteScalar<int>(@"
             INSERT INTO vaultkeeps (userId, keepId, vaultId)
@@ -24,8 +25,7 @@ namespace keepr.Repositories
             SELECT LAST_INSERT_ID();", vaultkeep
             );
 
-            vaultkeep.Id = id;
-            return vaultkeep;
+            return;
         }
         public IEnumerable<Keep> GetAll(string vaultId)
         {
@@ -42,6 +42,13 @@ namespace keepr.Repositories
             WHERE id = @Id", vaultkeep
             );
             return vaultkeep;
+        }
+
+        internal void Delete(VaultKeep vk)
+        {
+            _db.Execute(@"
+            DELETE FROM vaultkeeps WHERE keepId = @KeepId AND vaultId = @VaultId;
+            ", vk);
         }
     }
 }

@@ -35,6 +35,19 @@ namespace keepr.Controllers
             }
             throw new Exception("INVALID Keep");
         }
+
+        [HttpPut("{id}")]
+        public void UpdateKeep([FromBody] Keep keep)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.Update(keep);
+                return;
+            }
+            throw new Exception("INVALID Keep");
+
+        }
+
         [HttpDelete("{id}")]
         public void Delete([FromRoute] int id)
         {

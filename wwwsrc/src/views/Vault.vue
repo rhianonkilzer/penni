@@ -3,6 +3,11 @@
         <h3>
             {{vault.name}}
         </h3>
+        <p v-for="keep in keeps" :key="keep.id">
+
+            {{keep.name}}
+            <button @click="deleteVaultKeep(keep)">Remove</button>
+        </p>
 
 
     </div>
@@ -12,6 +17,7 @@
         name: "vault",
         data() {
             return {
+
             }
         },
         created() {
@@ -25,15 +31,22 @@
                 return this.$store.state.activeVault
             },
             keeps() {
-                return this.$store.state.keeps
+                return this.$store.state.vaultKeeps
             }
         },
         mounted() {
             this.$store.dispatch("getVault", this.$route.params.vaultId)
-            this.$store.dispatch("getKeeps", this.$route.params.vaultId)
+            this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId)
         },
         methods: {
+            deleteVaultKeep(keep) {
+                let vaultKeep = {
+                    keepId: keep.id,
+                    vaultId: this.vault.id
+                }
+                this.$store.dispatch("deleteVaultKeep", vaultKeep)
 
+            }
         }
 
     }

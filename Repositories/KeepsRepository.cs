@@ -42,14 +42,12 @@ namespace keepr.Repositories
         }
 
         // UPDATE 
-        public Keep Update(Keep keep)
+        public void Update(Keep keep)
         {
             _db.Execute(@"
-            UPDATE keeps SET (name, description, userid, img, isPrivate, views, shares, keeps) 
-            VALUES (@Name, @Description, @UserId, @Img, @Views, @Shares, @Keeps, @IsPrivate)
+            UPDATE keeps SET views = @Views, shares = @Shares, keeps = @Keeps 
             WHERE id = @Id", keep
             );
-            return keep;
         }
 
 

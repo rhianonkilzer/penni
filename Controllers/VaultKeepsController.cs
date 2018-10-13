@@ -1,8 +1,10 @@
 
 
+using System;
 using System.Collections.Generic;
 using keepr.Models;
 using keepr.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Controllers
@@ -22,6 +24,26 @@ namespace keepr.Controllers
         {
 
             return _repo.GetAll(vaultId);
+        }
+        [Authorize]
+        [HttpPost]
+        public void Create([FromBody]VaultKeep vk)
+        {
+            vk.UserId = HttpContext.User.Identity.Name;
+            if (ModelState.IsValid)
+            {
+                _repo.Create(vk);
+                return;
+            }
+            throw new Exception("INVALID VaultKeep");
+        }
+        [HttpPut]
+        public void DeleteVaultKeep([FromBody]VaultKeep vk)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.Delete(vk);
+            }
         }
 
     }
