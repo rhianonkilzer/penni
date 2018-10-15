@@ -5,11 +5,11 @@
             <input type="text" placeholder="Description" v-model="newVault.description" required>
             <button type="submit">Create Vault</button>
         </form>
-        <button @click="deleteVault(vault)">Delete Vault</button>
         <div class="vault" v-for="vault in vaults" :key="vault.id">
             <router-link :to="{name: 'vault', params: {vaultId: vault.id}}">
                 {{vault.name}}
             </router-link>
+            <button @click="deleteVault(vault)">Delete Vault</button>
         </div>
     </div>
 </template>
@@ -36,7 +36,7 @@
             }
         },
         methods: {
-            deleteVault(keep) {
+            deleteVault(vault) {
                 this.$store.dispatch("deleteVault", vault);
             },
             createVault() {

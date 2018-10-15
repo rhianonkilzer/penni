@@ -2,25 +2,52 @@
     <div class="row">
 
         <div class="keeps col-12">
-            <form @submit.prevent="createKeep">
-                <input type="text" placeholder="Name of Keep" v-model="newKeep.name" required>
-                <input type="text" placeholder="Description" v-model="newKeep.description" required>
-                <input type="url" placeholder="Image url" v-model="newKeep.img" required>
-                <button type="submit">Create Keep</button>
-            </form>
+            <div class="create mt-3 mb-3">
+                <h4>
+                    Create a new keep</h4> <i class="fas fa-plus fa-3x" data-toggle="modal" data-target="#createKeepModal"></i>
+            </div>
 
-            <div class="keep col-3 buttons-container" v-for="keep in keeps" :key="keep.id">
-                <p>{{keep.name}}</p>
-                <img class="image" :src="keep.img" alt="keep">
-                <div class="middle btn-group">
-                    <button class="btn" @click="deleteKeep(keep)">Delete Keep</button>
-                    <button class="btn" @click="viewKeep(keep)" data-toggle="modal" data-target="#viewKeepModal">View
-                        Keep</button>
-                    <button class="btn" @click="shareKeep(keep)">Share Keep</button>
-                    <button class="btn" @click="viewKeep(keep)" data-toggle="modal" data-target="#viewKeepModal">Add To
-                        Vault</button>
+            <div class="all-of-keeps mt-3">
+
+                <div class="keep col-3 buttons-container card " v-for="keep in keeps" :key="keep.id">
+                    <img class="card-image rounded mt-2" :src="keep.img" alt="keep">
+                    <p>{{keep.name}}</p>
+                    <div class="middle btn-group d-flex flex-column">
+                        <button class="btn" @click="deleteKeep(keep)">Delete Keep</button>
+                        <button class="btn" @click="viewKeep(keep)" data-toggle="modal" data-target="#viewKeepModal">View
+                            Keep</button>
+                        <button class="btn" @click="shareKeep(keep)">Share Keep</button>
+                        <button class="btn" @click="editKeep(keep)" data-toggle="modal" data-target="#editKeepModal">Edit
+                            Keep</button>
+                        <button class="btn" @click="viewKeep(keep)" data-toggle="modal" data-target="#viewKeepModal">Add
+                            To
+                            Vault</button>
+                    </div>
                 </div>
             </div>
+
+            <!-- create a keep modal  -->
+            <div class="modal fade" id="createKeepModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create A Keep:</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form @submit.prevent="createKeep" class="d-flex flex-column">
+                                <input type="text" placeholder="Name of Keep" v-model="newKeep.name" required>
+                                <input type="text" placeholder="Description" v-model="newKeep.description" required>
+                                <input type="url" placeholder="Image url" v-model="newKeep.img" required>
+                                <button type="submit" @click="createKeep(keep)" data-dismiss="modal">Create Keep</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of create a keep modal -->
 
 
 
@@ -35,7 +62,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <img :src="activeKeep.img" alt="keep">
+                            <img class="image rounded" :src="activeKeep.img" alt="keep">
                             <p>{{activeKeep.description}}</p>
                             <p>Views: {{activeKeep.views}}</p>
                             <p>Shares: {{activeKeep.shares}}</p>
@@ -49,6 +76,29 @@
                 </div>
             </div>
             <!-- end view keep modal -->
+
+            <!-- edit keep modal -->
+            <div class="modal fade" id="editKeepModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Keep: {{activeKeep.name}}</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form @submit.prevent="saveKeep" class="d-flex flex-column">
+                                <input type="text" placeholder="Name of Keep" v-model="activeKeep.name" required>
+                                <input type="text" placeholder="Description" v-model="activeKeep.description" required>
+                                <input type="url" placeholder="Image url" v-model="activeKeep.img" required>
+                                <button type="submit" data-dismiss="modal">Edit Keep</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of edit keep modal -->
 
         </div>
     </div>
@@ -95,15 +145,38 @@
             addKeepToVault() {
                 this.vaultKeep.keepId = this.activeKeep.id;
                 this.$store.dispatch("addKeepToVault", { vaultKeep: this.vaultKeep, keep: this.activeKeep })
+            },
+            editKeep(keep) {
+                this.activeKeep = keep;
+            },
+            saveKeep() {
+                this.$store.dispatch("updateKeep", this.activeKeep)
             }
         }
     }
 </script>
 
 <style scoped>
+    .card {
+
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        max-width: 32%;
+    }
+
+    .container {
+        padding: 2px 16px;
+    }
+
     .buttons-container {
         position: relative;
         width: 50%;
+    }
+
+    .card-image {
+        object-fit: cover;
+        width: 100%;
+        height: 70%;
     }
 
     .image {
@@ -124,6 +197,9 @@
         transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
         text-align: center;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .buttons-container:hover .image {
@@ -139,5 +215,19 @@
         color: white;
         font-size: 16px;
         padding: 16px 32px;
+    }
+
+    .all-of-keeps {
+        column-width: 30rem;
+
+    }
+
+    .keep {
+        margin: auto;
+        break-inside: avoid;
+    }
+
+    .row {
+        margin: 0;
     }
 </style>

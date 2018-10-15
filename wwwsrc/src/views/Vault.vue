@@ -1,13 +1,15 @@
 <template>
     <div class="vault">
-        <h3>
-            {{vault.name}}
-        </h3>
-        <p v-for="keep in keeps" :key="keep.id">
+
+        <h2>{{vault.name}}</h2>
+        <button @click="deleteVaultKeep(keep)">Remove</button>
+
+        <div v-for="keep in keeps" :key="keep.id">
+            <img class="image" :src="keep.img" alt="keep">
 
             {{keep.name}}
-            <button @click="deleteVaultKeep(keep)">Remove</button>
-        </p>
+
+        </div>
 
 
     </div>
@@ -54,5 +56,9 @@
 
 </script>
 <style>
-
+    .image {
+        object-fit: cover;
+        width: 300px;
+        height: 300px;
+    }
 </style>
