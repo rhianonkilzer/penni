@@ -37,9 +37,9 @@
                         <div class="modal-body">
                             <img :src="activeKeep.img" alt="keep">
                             <p>{{activeKeep.description}}</p>
-                            <p>{{activeKeep.views}}</p>
-                            <p>{{activeKeep.shares}}</p>
-                            <p>{{activeKeep.keeps}}</p>
+                            <p>Views: {{activeKeep.views}}</p>
+                            <p>Shares: {{activeKeep.shares}}</p>
+                            <p>Keeps: {{activeKeep.keeps}}</p>
                             <select name="" id="" v-model="vaultKeep.vaultId">
                                 <option :value="vault.id" v-for="vault in vaults">{{vault.name}}</option>
                             </select>

@@ -112,9 +112,6 @@ export default new Vuex.Store({
           dispatch('getVaults')
         })
     },
-    goToVaults() {
-      router.push({ name: 'vaults' })
-    },
 
     //END OF VAULTS
 
