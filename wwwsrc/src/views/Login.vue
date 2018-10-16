@@ -17,8 +17,8 @@
             <p v-if="loginForm">No account? Click to Register</p>
             <p v-else>Already have an account? click to Login</p>
         </div>
-
-        <router-link to="/home">Home</router-link>
+        <router-link tag="button" class="home-button" id="button" to="home">Dashboard</router-link>
+        <!-- <router-link to="/home">Home</router-link> -->
     </div>
 </template>
 

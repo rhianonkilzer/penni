@@ -4,7 +4,7 @@
         <div class="keeps col-12">
             <div class="create mt-3 mb-3">
                 <h4>
-                    Create a new keep</h4> <i class="fas fa-plus fa-3x" data-toggle="modal" data-target="#createKeepModal"></i>
+                    New keep</h4> <i class="fas fa-plus fa-3x" data-toggle="modal" data-target="#createKeepModal"></i>
             </div>
 
             <div class="all-of-keeps mt-3">
@@ -38,9 +38,9 @@
                         </div>
                         <div class="modal-body">
                             <form @submit.prevent="createKeep" class="d-flex flex-column">
-                                <input type="text" placeholder="Name of Keep" v-model="newKeep.name" required>
-                                <input type="text" placeholder="Description" v-model="newKeep.description" required>
-                                <input type="url" placeholder="Image url" v-model="newKeep.img" required>
+                                <input type="text" placeholder="Title..." v-model="newKeep.name" required>
+                                <input type="text" placeholder="Description..." v-model="newKeep.description" required>
+                                <input type="url" placeholder="Image url..." v-model="newKeep.img" required>
                                 <button type="submit" @click="createKeep(keep)" data-dismiss="modal">Create Keep</button>
                             </form>
                         </div>

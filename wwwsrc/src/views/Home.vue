@@ -1,12 +1,14 @@
 <template>
   <div class="home">
-    <div class="if-loggin" v-if="user.id">
+    <div class="if-loggedin" v-if="user.id">
       <h1>Welcome, {{$store.state.user.username}}!</h1>
       <button class="logout-button" @click="logout">LOGOUT</button>
     </div>
-    <router-link to="/login">Login</router-link>
+    <div class="not-logged-in" v-if="!user.id">
+      <router-link tag="button" class="login-button" id="button" to="login">Log In or Register</router-link>
+    </div>
+    <!-- <router-link to="/login">Login</router-link> -->
     <MyVaults />
-
     <Keeps />
   </div>
 </template>
